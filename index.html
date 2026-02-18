@@ -1,0 +1,25 @@
+kkkkk                    model: 'llama3',
+                    prompt: userText,
+                    stream: false
+                })
+            });
+
+            const data = await response.json();
+            chatBox.removeChild(typingDiv);
+            chatBox.innerHTML += `<div class="message bot">${data.response}</div>`;
+        } catch (error) {
+            chatBox.removeChild(typingDiv);
+            chatBox.innerHTML += `<div class="message bot" style="color: red;">Қате: Ollama қосулы ма?</div>`;
+        }
+
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    // PWA үшін сервис воркерді тіркеу
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js').catch(() => {});
+    }
+</script>
+
+</body>
+</html>
